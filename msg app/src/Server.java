@@ -53,6 +53,6 @@ public class Server extends JFrame implements ActionListener {
     }
     public static void main(String[] args) throws Exception {
         new Server().setVisible(true);
-        //System.out.println("Hello, World!");
+        
     }
 }
