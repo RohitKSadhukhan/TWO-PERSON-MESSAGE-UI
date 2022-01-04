@@ -1,21 +1,15 @@
 
 
-//bla bla bla
-
-
-
-
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-
-public class Server extends JFrame implements ActionListener {
+public class Client extends JFrame implements ActionListener {
     JPanel p1;
     JTextField t1;
     JButton b1;
     JTextArea a1;
-    Server()
+    Client()
     {
         p1=new JPanel();
         p1.setLayout(null);
@@ -39,7 +33,7 @@ public class Server extends JFrame implements ActionListener {
         p1.add(jl1);
 
 
-        ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("icon/cat1.jpg"));
+        ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("icon/cat2.jpg"));
         Image i4 = i3.getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
         ImageIcon i5 = new ImageIcon(i4);
         JLabel jl2 = new JLabel(i5);
@@ -47,7 +41,7 @@ public class Server extends JFrame implements ActionListener {
         p1.add(jl2);
 
 
-        JLabel jl3=new JLabel("Rohit");
+        JLabel jl3=new JLabel("Bhaswata");
         jl3.setFont(new Font("SAN_SERIF",Font.BOLD,18));
         jl3.setForeground(Color.WHITE);
         jl3.setBounds(100, 20, 100, 20);
@@ -105,7 +99,7 @@ public class Server extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         setSize(450,700);
-        setLocation(20, 20);
+        setLocation(600, 20);
         setUndecorated(true);
         setVisible(true);
         
@@ -120,8 +114,9 @@ public class Server extends JFrame implements ActionListener {
         t1.setText("");
     }
     public static void main(String[] args) throws Exception {
-        new Server().setVisible(true);
+        new Client().setVisible(true);
         //System.out.println("Hello, World!");
     }
 }
+
 
