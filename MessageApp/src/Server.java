@@ -7,7 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
 public class Server extends JFrame implements ActionListener {
     JPanel p1;
     JTextField t1;
@@ -119,9 +120,12 @@ public class Server extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae)
     {
     	try {
-	        String s=t1.getText();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
+            //System.out.println(dtf.format(now));  
+	        String s="Rohit ["+dtf.format(now)+"] : "+t1.getText();
 	       // a1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-	        a1.setText(a1.getText()+"\n"+"Rohit : "+s);
+	        a1.setText(a1.getText()+"\n"+s);
 	        dout.writeUTF(s);
 	        t1.setText("");
 	        
@@ -140,7 +144,9 @@ public class Server extends JFrame implements ActionListener {
 	        while(true) {
 		       // a1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		        String s = din.readUTF();
-		        a1.setText(a1.getText()+"\nBhaswata : "+s);
+                //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+                //LocalDateTime now = LocalDateTime.now();  
+		        a1.setText(a1.getText()+"\n"+s);
 	        }
     	}
     	catch(Exception e) {

@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
-
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
 public class Client extends JFrame implements ActionListener {
     JPanel p1;
     JTextField t1;
@@ -117,9 +118,11 @@ public class Client extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae)
     {
     	try {
-	        String s=t1.getText();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
+	        String s="Bhaswata ["+dtf.format(now)+"] : "+t1.getText();
 	        //a1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-	        a1.setText(a1.getText()+"\n"+"Bhaswata : "+s);
+	        a1.setText(a1.getText()+"\n"+s);
 	        dout.writeUTF(s);
 	        t1.setText("");
 	        
@@ -137,9 +140,11 @@ public class Client extends JFrame implements ActionListener {
 	        din = new DataInputStream(skt.getInputStream());
 	        dout = new DataOutputStream(skt.getOutputStream());
 	        while(true) {
+                //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+                //LocalDateTime now = LocalDateTime.now();  
 		        //a1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		        String s = din.readUTF();
-		        a1.setText(a1.getText()+"\n Rohit : "+s);
+		        a1.setText(a1.getText()+"\n"+s);
 	        }
     	}
     	catch(Exception e) {
