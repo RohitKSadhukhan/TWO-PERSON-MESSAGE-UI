@@ -119,7 +119,7 @@ public class Client extends JFrame implements ActionListener {
     	try {
 	        String s=t1.getText();
 	        //a1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-	        a1.setText(a1.getText()+"\n"+s);
+	        a1.setText(a1.getText()+"\n"+"Bhaswata : "+s);
 	        dout.writeUTF(s);
 	        t1.setText("");
 	        
