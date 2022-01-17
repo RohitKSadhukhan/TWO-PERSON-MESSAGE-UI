@@ -1,20 +1,23 @@
-
-
-//bla bla bla
-
-
-
-
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
 
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+
 public class Server extends JFrame implements ActionListener {
     JPanel p1;
     JTextField t1;
     JButton b1;
-    JTextArea a1;
+    static JTextArea a1;
+    
+    static Socket skt;
+    static ServerSocket svskt;
+    static DataInputStream din;
+    static DataOutputStream dout;
     Server()
     {
         p1=new JPanel();
@@ -88,6 +91,7 @@ public class Server extends JFrame implements ActionListener {
         a1.setEditable(false);
         a1.setLineWrap(true);
         a1.setWrapStyleWord(true);
+        a1.setAlignmentX(RIGHT_ALIGNMENT);
         add(a1);
 
         t1=new JTextField();
@@ -114,14 +118,39 @@ public class Server extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent ae)
     {
-        String s=t1.getText();
-        
-        a1.setText(a1.getText()+"\n\t\t\t"+s);
-        t1.setText("");
+    	try {
+	        String s=t1.getText();
+	       // a1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+	        a1.setText(a1.getText()+"\n"+s);
+	        dout.writeUTF(s);
+	        t1.setText("");
+	        
+    	}
+    	catch (Exception e) {
+    		
+    	}
     }
     public static void main(String[] args) throws Exception {
-        new Server().setVisible(true);
-        //System.out.println("Hello, World!");
+    	try {
+	        new Server().setVisible(true);
+	        svskt = new ServerSocket(5000);
+	        skt = svskt.accept();
+	        din = new DataInputStream(skt.getInputStream());
+	        dout = new DataOutputStream(skt.getOutputStream());
+	        while(true) {
+		       // a1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		        String s = din.readUTF();
+		        a1.setText(a1.getText()+"\nBhaswata : "+s);
+	        }
+    	}
+    	catch(Exception e) {
+    		
+    	}
+    	finally {
+    		skt.close();
+    		svskt.close();
+    	}
+        
     }
 }
 
